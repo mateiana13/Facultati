@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<style type="text/css">
+			input.ng-dirty.ng-valid{
+                background-color:lightgreen;
+            }
+            input.ng-dirty.ng-invalid{
+                background-color:tomato;
+            }
+		</style>
+		 
+	</head>
+	
+	<body>
+		
+		<div id="div1"></div>
+		
+		<div>
+			<div>
+				<h1><u><i>LISTA DE FACULTATI</i></u></h1>
+	
+				<table class="table table-bordered" >
+					
+					<thead id="head">
+						<th>Nume Facultate</th>
+						<th>Specializare</th>
+						<th>Oras</th>
+					</thead>
+					
+					<tr ng-repeat="facultate in facultati" ng-include="getTemplate(facultate)">
+						
+						<script type="text/ng-template" id="display">
+							<td>{{facultate.numeFacultate | uppercase}}</td>
+							<td>{{facultate.specializare | uppercase}}</td>
+							<td>{{facultate.oras | uppercase}}</td>
+							<td colspan="3">
+								<input type="button" class="btn btn-xs btn-delete" id="btn1" value="delete" ng-click="deleteFacultate(facultate)">
+								<input type="button" class="btn btn-xs btn-edit" id="btn1" value="edit" ng-click="editFacultate(facultate)">
+								<a ui-sref="studenti({idFacultate : facultate.id})">vezi studenti inscrisi</a>
+							</td>	
+						</script>
+						
+						<script type="text/ng-template" id="edit">
+							<td><input type="text" ng-model="facultate.numeFacultate"></td>
+							<td><input type="text" ng-model="facultate.specializare"></td>
+							<td><input type="text" ng-model="facultate.oras"></td>
+							<td colspan="3">
+								<input type="button" value="save" ng-click="saveFacultate(facultate)">
+							</td>	
+						</script>
+						
+					</tr>
+				</table>
+				
+				</div>
+				
+				<div id="div2"></div>
+				
+				<form class="form-horizontal" role="form" id="form1" novalidate>
+					
+					<div class="form-group">
+				      <label class="control-label col-sm-2" for="numeFacultate">Nume Facultate:</label>
+				      <div class="col-sm-10">
+				        <input type="text" class="form-control" name="nume" placeholder="Numele Facultatii" ng-model="facultate.numeFacultate" required>
+				      </div>
+					</div>
+					
+					<div class="form-group">
+				      <label class="control-label col-sm-2" for="specializare">Specializare:</label>
+				      <div class="col-sm-10">
+				        <input type="text" class="form-control" name="specializare" placeholder="Specializare" ng-model="facultate.specializare" required>
+				      </div>
+					</div>
+					
+					<div class="form-group">
+				      <label class="control-label col-sm-2" for="oras">Oras:</label>
+				      <div class="col-sm-10">
+				        <input type="text" class="form-control" name="oras" placeholder="Oras" ng-model="facultate.oras" required>
+				      </div>
+					</div>
+					
+			        <!--Nume Facultate:<br /> <input type="text" name ="facultate" placeholder = "Facultate" ng-model="facultate.numeFacultate" required><br /><br />-->
+			        <!--Specializare:</br> <input type="text" name="specializare" placeholder = "Specializare" ng-model="facultate.specializare" required><br /><br />-->
+			        <!--Oras:<br /> <input type="text" name="oras" placeholder = "Orasul" ng-model="facultate.oras" required><br /><br />-->
+			        <input type="button" class="btn btn-add" id="btn1" value="ADD" ng-click="addFacultate(facultate)">
+			        
+				</form>
+				
+			
+		</div>
+
+	</body>
+
+</html>

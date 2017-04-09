@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+	
+	<head>
+		<style type="text/css">
+			input.ng-dirty.ng-valid{
+                background-color:lightgreen;
+            }
+            input.ng-dirty.ng-invalid{
+                background-color:tomato;
+            }
+		</style>
+	</head>
+	<body>
+		
+		<div id="div3"></div>
+	
+		<div>
+			<div>
+				
+				<h2><u><i>LISTA DE STUDENTI AI FACULTATII</i></u></h2>
+				<div id="div4"></div>
+				
+				<table id="table2" class="table table-bordered">
+					
+					<thead>
+						<th>Nume Student</th>
+						<th>An</th>
+						<th>Telefon</th>
+						<th>Email</th>
+					</thead>
+					
+					<tr ng-repeat="student in facultate.studenti | orderBy: 'an'" 
+						ng-class="{'an1': student.an == 1, 'an2': student.an == 2, 'an3' : student.an == 3, 'an4' : student.an == 4, 'an5' : student.an == 5}"
+						ng-include="getTemplate(student)">
+						
+						<script type="text/ng-template" id="display">
+							<td>{{student.numeStudent | uppercase}}</td>
+							<td>{{student.an}}</td>
+							<td>{{student.telefon}}</td>
+							<td>{{student.email}}</td>
+							<td colspan="3">
+								<input type="button" class="btn btn-xs btn-delete" value="delete" ng-click="deleteStudent(student)">
+								<input type="button" class="btn btn-xs btn-edit" value="edit" ng-click="editStudent(student)">
+							</td>	
+						</script>
+						
+						<script type="text/ng-template" id="edit">
+							<td><input type="text" ng-model="student.numeStudent"></td>
+							<td><input type="text" ng-model="student.an"></td>
+							<td><input type="text" ng-model="student.telefon"></td>
+							<td><input type="text" ng-model="student.email"></td>
+							<td colspan="3">
+								<input type="button" value="save" ng-click="saveStudent(student)">
+							</td>	
+						</script>
+						
+					</tr>
+					
+				</table>
+				
+				<div id="div5"></div>
+				
+				<form class="form-horizontal" role="form" id="form2" name="f2" novalidate>
+					
+						<div class="form-group">
+					      <label class="control-label col-sm-2" for="numeStudent">Nume Student:</label>
+					      <div class="col-sm-10">
+					        <input type="text" class="form-control" name="nume" placeholder="Nume" ng-model="student.numeStudent" required>
+					      </div>
+					    </div>
+					
+				        <!--Nume Student:<br/> <input type="text" placeholder = "Nume" ng-model="student.numeStudent" required><br /><br/>-->
+				       <!-- An:<br/> <input type="number" name="an" placeholder = "An" ng-model="student.an" required  max = "5" required min="1"><br />
+			                    <span ng-show="f2.an.$error.min">NU exista studenti inscrisi in acest an!</span>
+			                    <span ng-show="f2.an.$error.max">NU exista studenti inscrisi in acest an!</span>
+	  
+				        <br/>-->
+				        
+				        <div class="form-group">
+					      <label class="control-label col-sm-2" for="an">An:</label>
+					      <div class="col-sm-10">
+					        <input type="number" class="form-control" name="an" placeholder="Anul de studiu" ng-model="student.an" required max="5" required min="1">
+					      	 <span ng-show="f2.an.$error.min">NU exista studenti inscrisi in acest an!</span>
+			                 <span ng-show="f2.an.$error.max">NU exista studenti inscrisi in acest an!</span>
+					      </div>
+					    </div>
+				        
+				        
+				        <!--Telefon:<br/> <input type="text" name = "telefon" placeholder = "(xxx) xxx xxxx" ng-model="student.telefon" required><br /><br/>-->
+				        
+				        <div class="form-group">
+					      <label class="control-label col-sm-2" for="telefon">Telefon:</label>
+					      <div class="col-sm-10">
+					        <input type="text" class="form-control" name="telefon" placeholder="(xxx) xxx xxxx" ng-model="student.telefon" required>
+					      </div>
+					    </div>
+				        
+				        <!--Email: <br/><input type="email" name = "myemail" placeholder = "username@email.com" ng-model="student.email" required><br />
+				        	<span ng-show = "f2.myemail.$error.email">Introduceti o adresa de email valida!</span><br/>-->
+				        	
+				        <div class="form-group">
+					      <label class="control-label col-sm-2" for="email">Telefon:</label>
+					      <div class="col-sm-10">
+					        <input type="email" class="form-control" name="myemail" placeholder="username@email.com" ng-model="student.email" required>
+					     	<span ng-show = "f2.myemail.$error.email">Introduceti o adresa de email valida!</span><br/>
+					      </div>
+					    </div>
+				        	
+				        	
+				        <input type="button" class="btn btn-add" value="add" ng-click="addStudent(student)">
+			        
+				</form>
+				<div id="back" ui-sref="facultati"><b> Inapoi la lista facultatilor</b></div>
+			</div>
+			
+		</div>
+	
+	</body>
+
+</html>
